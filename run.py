@@ -47,13 +47,11 @@ def target_transform(label):
     return torch.Tensor([[label]]).float()
 
 
-def train(model, loader, optimizer, loss, device=None):
+def train(model, loader, optimizer, loss, device=None, epoch=None):
     avg_loss = AverageMeter()
     model.train()
 
-    print(f"Incoming iterations: {len(loader)}")
-    for sequences, labels in loader:
-        print("Iter")
+    for sequences, labels in tqdm(loader, f"Epoch {epoch}, training"):
 
         if device:
             # move samples to right device
@@ -120,11 +118,11 @@ if __name__ == "__main__":
     # training
     for epoch in range(0, 2):
         t = time()
-        loss_train = train(model, loaders['train'], optimizer, loss, device)
+        loss_train = train(model, loaders['train'], optimizer, loss, device, epoch)
         loss_val = test(model, loaders['val'], loss, device)
 
         # print progress
-        if epoch % 5 == 0:
+        if True:  # epoch % 5 == 0
             print('Epoch: {:02d}'.format(epoch),
                   'loss_train: {:.6f}'.format(loss_train),
                   'loss_val: {:.6f}'.format(loss_val),
