@@ -72,11 +72,11 @@ def train(model, loader, optimizer, loss, device=None, epoch=None):
     return avg_loss.avg
 
 
-def test(model, loader, loss, device=None):
+def test(model, loader, loss, device=None, epoch=None):
     avg_loss = AverageMeter()
     model.eval()
 
-    for sequences, labels in loader:
+    for sequences, labels in tqdm(loader, f"Epoch {epoch}, testing"):
 
         if device:
             # move samples to right device
@@ -90,7 +90,6 @@ def test(model, loader, loss, device=None):
     return avg_loss.avg
 
 
-# TODO right now the device is set to none, there are not GPU optimizations
 if __name__ == "__main__":
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -119,7 +118,7 @@ if __name__ == "__main__":
     for epoch in range(0, 2):
         t = time()
         loss_train = train(model, loaders['train'], optimizer, loss, device, epoch)
-        loss_val = test(model, loaders['val'], loss, device)
+        loss_val = test(model, loaders['val'], loss, device, epoch)
 
         # print progress
         if True:  # epoch % 5 == 0
