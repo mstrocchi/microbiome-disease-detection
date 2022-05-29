@@ -6,12 +6,12 @@ from tqdm import tqdm
 from Bio import SeqIO
 import numpy as np
 
-DATA_PATH = '/Volumes/2BIG/RP/dataset/'
-PROCESSED_PATH = DATA_PATH + 'processed/'
-SAVE_PATH = DATA_PATH + 'subsampled-10000/'
 
 BASES = ['A', 'C', 'G', 'T']
-SEQUENCES_PER_SAMPLE = 10000
+SEQUENCES_PER_SAMPLE = 1000
+DATA_PATH = '/Volumes/2BIG/RP/dataset/'
+PROCESSED_PATH = DATA_PATH + 'processed/'
+SAVE_PATH = DATA_PATH + f'subsampled-{SEQUENCES_PER_SAMPLE}/'
 
 
 if __name__ == '__main__':
