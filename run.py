@@ -98,7 +98,7 @@ if __name__ == "__main__":
         torch.cuda.manual_seed(2021)
     device = torch.device(device)
 
-    dataset_path = '/Volumes/2BIG/RP/dataset/k-mer/3-mer-uncompressed/'
+    dataset_path = '/Volumes/2BIG/RP/dataset/k-mer/1000/3-mer-uncompressed/'
     dataset = CrohnDiseaseDataset(dataset_path, transform, target_transform)
     dataset_classes = ['train', 'val', 'test']
 
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     #  low amount of samples and class imbalances
     datasets = dict(zip(dataset_classes, random_split(dataset, [700, 150, 211])))
     # TODO The 'vanilla' loader uses a batch sampler by default, this might be optimal for out setup
-    loaders = {d_class: DataLoader(datasets[d_class], batch_size=8, shuffle=True) for d_class in datasets}
+    loaders = {d_class: DataLoader(datasets[d_class], batch_size=8, shuffle=True, num_workers=4) for d_class in datasets}
 
     model = SetTransformer(dim_input=64, dim_output=1, num_outputs=1)
     if device:
