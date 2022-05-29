@@ -7,9 +7,9 @@ from Bio import SeqIO
 import numpy as np
 from transforms.kmer import KmerVec
 
-
+SAMPLES_PER_FILE = 1000
 DATA_PATH = '/Volumes/2BIG/RP/dataset/'
-SUBSAMPLED_PATH = DATA_PATH + 'subsampled-10000/'
+SUBSAMPLED_PATH = DATA_PATH + f'subsampled-{SAMPLES_PER_FILE}/'
 BASES = ['A', 'C', 'G', 'T']
 
 
@@ -25,18 +25,17 @@ def compute_dataset(transform):
             filename = '.'.join(os.path.basename(file_path).split('.')[:-1])
             # save_path = f"{DATA_PATH}{dirname}/{transform.name}/{label}/{filename}.npz"
             # np.savez_compressed(save_path, *embeddings)
-            save_path = f"{DATA_PATH}{dirname}/3-mer-uncompressed/{label}/{filename}.npz"
+            save_path = f"{DATA_PATH}{dirname}/{SAMPLES_PER_FILE}/{transform.name}-uncompressed/{label}/{filename}.npz"
             np.savez(save_path, *embeddings)
 
 
-# TODO be sure that all the embedding methods use the same set of sequences
 if __name__ == '__main__':
-    # for k in range(3, 6, 1):
-    #     transform = KmerVec(k=k)
-    #     compute_dataset(transform)
+    for k in range(3, 6, 1):
+        transform = KmerVec(k=k)
+        compute_dataset(transform)
 
-    transform = KmerVec(k=3)
-    compute_dataset(transform)
+    # transform = KmerVec(k=3)
+    # compute_dataset(transform)
 
 
 
