@@ -3,3 +3,4 @@ sklearn
 numpy
 tqdm
 biopython
+matplotlib
