@@ -71,7 +71,7 @@ class SetTransformerPointCloud(nn.Module):
         )
 
     def forward(self, X):
-        return self.dec(self.enc(X)).squeeze()
+        return self.dec(self.enc(X))
 
 
 # Taken from the python notebook in the repo
