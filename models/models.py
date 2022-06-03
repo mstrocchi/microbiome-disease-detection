@@ -64,9 +64,9 @@ class SetTransformerPointCloud(nn.Module):
             ISAB(dim_hidden, dim_hidden, num_heads, num_inds, ln=ln),
         )
         self.dec = nn.Sequential(
-            nn.Dropout(),
+            nn.Dropout(p=0.05),
             PMA(dim_hidden, num_heads, num_outputs, ln=ln),
-            nn.Dropout(),
+            nn.Dropout(p=0.05),
             nn.Linear(dim_hidden, dim_output),
         )
 
