@@ -72,22 +72,3 @@ class SetTransformerPointCloud(nn.Module):
 
     def forward(self, X):
         return self.dec(self.enc(X))
-
-
-# Taken from the python notebook in the repo
-# class SmallSetTransformer(nn.Module):
-#     def __init__(self,):
-#         super().__init__()
-#         self.enc = nn.Sequential(
-#             SAB(dim_in=VEC_LEN, dim_out=DIM_HIDDEN, num_heads=NUM_HEADS),
-#             SAB(dim_in=DIM_HIDDEN, dim_out=DIM_HIDDEN, num_heads=NUM_HEADS),
-#         )
-#         self.dec = nn.Sequential(
-#             PMA(dim=DIM_HIDDEN, num_heads=NUM_HEADS, num_seeds=NUM_OUTPUTS),
-#             nn.Linear(in_features=DIM_HIDDEN, out_features=DIM_OUTPUT),
-#         )
-#
-#     def forward(self, x):
-#         x = self.enc(x)
-#         x = self.dec(x)
-#         return x.squeeze(-1)
